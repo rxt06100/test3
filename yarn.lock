@@ -8422,7 +8422,7 @@ pixi.js-legacy@^5.3.6:
     "@pixi/canvas-text" "5.3.6"
     pixi.js "5.3.6"
 
-pixi.js@5.3.6:
+pixi.js@5.3.6, pixi.js@^5.3.6:
   version "5.3.6"
   resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-5.3.6.tgz#ff30272c6122e026a9ce1ca98c3d2be0bd747ec7"
   integrity sha512-4SWAB2wPrH0vIuJ2pFUEz3IjQcWFMgn4qU2Srfigiiv9bVSW3E7Aa5hT8nSP9t6GM7Pqh5CWcWh4I4fsNLFwjA==
