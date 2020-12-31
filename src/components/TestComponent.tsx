@@ -3,17 +3,17 @@ import { Sprite, useTick, useApp } from '@inlet/react-pixi';
 import * as PIXI from 'pixi.js';
 import React from 'react';
 
-const TestComponent = (props:{stageWidth:number, stageHeight:number}) => {
+const TestComponent = (props:{stageWidth:number, stageHeight:number, onDragEndEvent:Function}) => {
   // const [rotation, setRotation] = useState(0);
   PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-  const yuruWidth = 650;
-  const yuruHeight = 433;
+  const yuruWidth = 783;
+  const yuruHeight = 740;
   const [x, setX] = useState(props.stageWidth/2);
   const [y, setY] = useState(props.stageHeight/2);
   const [isDraggable, setIsDraggable] = useState(false);
   const [targetData, setTargetData] = useState<any>(null);
   const app = useApp();
-
+  app.stage.sortableChildren = true;
   //enterframe
   /* useTick(() => {
     x < props.stageWidth + (yuruWidth / 2) ? setX(x + 1) : setX(yuruWidth / -2);
@@ -34,8 +34,12 @@ const TestComponent = (props:{stageWidth:number, stageHeight:number}) => {
 }
   // マウスアップの
   const onMouseUpEvent = (e:PIXI.InteractionEvent) => {
-    setIsDraggable(false);
-    setTargetData(null);
+    if(targetData.getLocalPosition) {
+      const position = targetData.getLocalPosition(app.stage);
+      props.onDragEndEvent(new PIXI.Point(position.x, position.y));
+      setIsDraggable(false);
+      setTargetData(null);
+    }
   }
 
   useEffect(() => {
@@ -49,10 +53,10 @@ const TestComponent = (props:{stageWidth:number, stageHeight:number}) => {
 
   return (
     <Sprite 
-      image="./yuru.jpg" 
+      image="./dorne_fpv.png" 
       anchor={0.5} 
-      width={yuruWidth}
-      height={yuruHeight}
+      width={yuruWidth / 3}
+      height={yuruHeight / 3}
       rotation={0}
       x={x}
       y={y}
@@ -63,6 +67,7 @@ const TestComponent = (props:{stageWidth:number, stageHeight:number}) => {
       pointermove={(e:PIXI.InteractionEvent) => onMoveEvent(e)}
       pointerup={(e:PIXI.InteractionEvent) => onMouseUpEvent(e)}
       pointerupoutside={(e:PIXI.InteractionEvent) => onMouseUpEvent(e)}
+      zIndex={10}
     />
   );
 };
