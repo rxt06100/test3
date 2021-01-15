@@ -1,6 +1,7 @@
 import { Stage, Sprite, useApp } from '@inlet/react-pixi';
 import TestComponent from './components/TestComponent';
 import * as PIXI from 'pixi.js';
+import './App.css';
 
 const width = 1000
 const height = 500
